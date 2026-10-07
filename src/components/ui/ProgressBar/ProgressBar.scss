@@ -1,0 +1,23 @@
+@use 'tokens' as *;
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 10;
+  background: transparent;
+
+  &__fill {
+    height: 100%;
+    background: var(--color-accent);
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform $duration $ease-out;
+  }
+
+  @media print {
+    display: none;
+  }
+}

@@ -1,0 +1,91 @@
+@use 'tokens' as *;
+
+.deck {
+  --deck-scale: 1;
+  position: fixed;
+  inset: 0;
+
+  &__viewport {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  // 1280x720 の固定サイズのステージを中央に置き、--deck-scale で拡大縮小する
+  &__stage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: $slide-width;
+    height: $slide-height;
+    transform: translate(-50%, -50%) scale(var(--deck-scale));
+    background: var(--color-surface);
+    box-shadow: var(--shadow-slide);
+    overflow: hidden;
+  }
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: $slide-padding-y $slide-padding-x;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(48px);
+  transition:
+    opacity $duration $ease-out,
+    transform $duration $ease-out,
+    visibility 0s linear $duration;
+
+  &.is-before {
+    transform: translateX(-48px);
+  }
+
+  &.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity $duration $ease-out,
+      transform $duration $ease-out,
+      visibility 0s;
+  }
+}
+
+// 印刷（PDF 保存）時は全スライドを1ページずつ並べる
+@media print {
+  @page {
+    size: $slide-width $slide-height;
+    margin: 0;
+  }
+
+  .deck {
+    position: static;
+
+    &__viewport {
+      position: static;
+      overflow: visible;
+    }
+
+    &__stage {
+      position: static;
+      width: auto;
+      height: auto;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  .slide {
+    position: relative;
+    width: $slide-width;
+    height: $slide-height;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: none;
+    break-after: page;
+  }
+}

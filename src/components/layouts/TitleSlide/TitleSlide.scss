@@ -1,0 +1,69 @@
+@use 'tokens' as *;
+
+.title-slide {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: $space-5;
+  padding-left: $space-6;
+
+  // 左側のアクセントライン
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20%;
+    bottom: 20%;
+    width: 8px;
+    border-radius: 4px;
+    background: var(--color-accent);
+  }
+
+  // 右上の装飾（同心円）
+  &__decor {
+    position: absolute;
+    right: -180px;
+    top: -200px;
+    width: 560px;
+    height: 560px;
+    border-radius: 50%;
+    border: 2px solid var(--color-accent-soft);
+    box-shadow:
+      0 0 0 60px var(--color-surface),
+      0 0 0 62px var(--color-accent-soft),
+      0 0 0 120px var(--color-surface),
+      0 0 0 122px var(--color-accent-soft);
+    pointer-events: none;
+  }
+
+  &__eyebrow {
+    align-self: flex-start;
+    padding: $space-1 $space-4;
+    border-radius: 999px;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    font-size: $font-size-sm;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  &__title {
+    font-size: $font-size-3xl;
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+  }
+
+  &__subtitle {
+    font-size: $font-size-lg;
+    color: var(--color-muted);
+  }
+
+  &__meta {
+    margin-top: $space-6;
+    font-size: $font-size-sm;
+    color: var(--color-muted);
+  }
+}

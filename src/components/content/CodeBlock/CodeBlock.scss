@@ -1,0 +1,67 @@
+@use 'tokens' as *;
+
+.code-block {
+  margin: 0;
+  border-radius: $radius-md;
+  background: var(--color-code-bg);
+  color: var(--color-code-text);
+  overflow: hidden;
+
+  &__filename {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    padding: $space-2 $space-4;
+    border-bottom: 1px solid rgb(255 255 255 / 8%);
+    font-family: $font-mono;
+    font-size: 14px;
+    color: var(--color-code-muted);
+  }
+
+  // ウィンドウ風の3つの丸
+  &__dots {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #e5735f;
+    box-shadow:
+      16px 0 0 #e5b75f,
+      32px 0 0 #6fbf73;
+    margin-right: 32px;
+  }
+
+  &__pre {
+    margin: 0;
+    padding: $space-4 $space-5;
+    font-family: $font-mono;
+    font-size: 16px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+
+    code {
+      padding: 0;
+      border: 0;
+      background: none;
+      font-size: inherit;
+    }
+  }
+
+  .tok-comment,
+  .tok-muted {
+    color: var(--color-code-muted);
+  }
+
+  .tok-key {
+    color: var(--color-code-key);
+  }
+
+  .tok-heading {
+    color: var(--color-code-accent);
+    font-weight: 600;
+  }
+
+  .tok-inline {
+    color: #b5d99c;
+  }
+}

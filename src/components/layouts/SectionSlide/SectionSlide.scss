@@ -1,0 +1,47 @@
+@use 'tokens' as *;
+
+.slide--section {
+  background: var(--color-accent-soft);
+}
+
+.section-slide {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: $space-4;
+
+  // 背景の大きな章番号
+  &__number {
+    position: absolute;
+    right: -20px;
+    bottom: -90px;
+    font-size: 420px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--color-accent);
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  &__title {
+    font-size: $font-size-3xl;
+    font-weight: 900;
+    line-height: 1.2;
+  }
+
+  &__lead {
+    max-width: 760px;
+    font-size: $font-size-lg;
+    color: var(--color-muted);
+  }
+}

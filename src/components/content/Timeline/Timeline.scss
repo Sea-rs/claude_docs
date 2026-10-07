@@ -1,0 +1,60 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.timeline {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  list-style: none;
+  padding: 0;
+
+  // 横に通る線（時刻ラベルの下、ドットの中心を通る）
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 48px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--color-border);
+  }
+
+  &__item {
+    @include tone-modifiers;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 $space-3;
+  }
+
+  &__time {
+    font-family: $font-mono;
+    font-size: $font-size-md;
+    font-weight: 600;
+    color: var(--tone);
+  }
+
+  &__dot {
+    width: 20px;
+    height: 20px;
+    margin: 4px 0 $space-3;
+    border-radius: 50%;
+    background: var(--tone);
+    box-shadow: 0 0 0 5px var(--color-surface);
+  }
+
+  &__title {
+    font-size: $font-size-sm;
+    font-weight: 700;
+  }
+
+  &__text {
+    font-size: $font-size-xs;
+    color: var(--color-muted);
+    line-height: 1.6;
+  }
+}

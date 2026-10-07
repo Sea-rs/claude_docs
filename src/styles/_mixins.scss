@@ -1,0 +1,43 @@
+@use 'tokens' as *;
+
+// tone 名（accent / blue / green / yellow）から色の CSS 変数を返す
+@function tone-color($tone) {
+  @return var(--color-#{$tone});
+}
+
+@function tone-soft($tone) {
+  @return var(--color-#{$tone}-soft);
+}
+
+// `.block--blue` のような tone 修飾子をまとめて生成する。
+// 中で --tone / --tone-soft を使えば色違いを1回の記述で作れる。
+@mixin tone-modifiers {
+  @each $tone in $tones {
+    &--#{$tone} {
+      --tone: #{tone-color($tone)};
+      --tone-soft: #{tone-soft($tone)};
+    }
+  }
+}
+
+@mixin surface {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: $radius-md;
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+@mixin reset-button {
+  appearance: none;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}

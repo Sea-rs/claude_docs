@@ -1,0 +1,111 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+$arrow-size: 28px;
+
+.flow {
+  &__steps {
+    display: flex;
+    gap: $arrow-size;
+    list-style: none;
+    padding: 0;
+  }
+
+  &__step {
+    @include surface;
+    position: relative;
+    flex: 1;
+    padding: $space-5 $space-4 $space-4;
+    text-align: center;
+  }
+
+  // ステップ間の矢印
+  &__step + &__step::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -$arrow-size + 6px;
+    width: 0;
+    height: 0;
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-left: 12px solid var(--color-accent);
+    transform: translateY(-50%);
+  }
+
+  &__index {
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    margin-bottom: $space-2;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: var(--color-surface);
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  &__title {
+    font-size: $font-size-md;
+    font-weight: 700;
+  }
+
+  &__text {
+    margin-top: $space-1;
+    font-size: $font-size-xs;
+    color: var(--color-muted);
+    line-height: 1.6;
+  }
+
+  // 「繰り返す」を表す U 字の線
+  &__loop {
+    position: relative;
+    height: 44px;
+    margin: 0 10%;
+    border: 2px dashed var(--color-accent);
+    border-top: 0;
+    border-radius: 0 0 $radius-md $radius-md;
+    text-align: center;
+
+    span {
+      position: relative;
+      top: 28px;
+      padding: 2px $space-4;
+      border-radius: 999px;
+      background: var(--color-accent-soft);
+      color: var(--color-accent);
+      font-size: $font-size-xs;
+      font-weight: 700;
+    }
+  }
+
+  &--vertical &__steps {
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  &--vertical &__step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: $space-4;
+    align-items: center;
+    padding: $space-3 $space-4;
+    text-align: left;
+
+    .flow__index {
+      grid-row: span 2;
+      margin: 0;
+    }
+  }
+
+  &--vertical &__step + &__step::before {
+    top: -18px;
+    left: 50%;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 12px solid var(--color-accent);
+    border-bottom: 0;
+    transform: translateX(-50%);
+  }
+}

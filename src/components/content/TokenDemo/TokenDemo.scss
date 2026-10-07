@@ -1,0 +1,59 @@
+@use 'sass:list';
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.token-demo {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+
+  &__row {
+    @include surface;
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    align-items: center;
+    gap: $space-5;
+    padding: $space-4 $space-5;
+  }
+
+  &__label {
+    font-size: $font-size-xs;
+    font-weight: 700;
+    color: var(--color-muted);
+  }
+
+  &__tokens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  &__token {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: $font-mono;
+    font-size: $font-size-md;
+    line-height: 1.4;
+    white-space: pre;
+
+    // 隣り合うトークンが区別できるよう4色を順番に使う
+    @each $tone in $tones {
+      $i: list.index($tones, $tone) - 1;
+      &--#{$i} {
+        background: tone-soft($tone);
+        color: tone-color($tone);
+        box-shadow: inset 0 -3px 0 tone-color($tone);
+      }
+    }
+  }
+
+  &__count {
+    font-size: $font-size-sm;
+    color: var(--color-muted);
+    white-space: nowrap;
+
+    strong {
+      font-size: $font-size-lg;
+    }
+  }
+}

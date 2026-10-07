@@ -1,0 +1,41 @@
+// ------------------------------------------------------------
+// デザイントークン（Sass 変数）
+// 色は CSS カスタムプロパティ（_theme.scss）で管理し、
+// サイズやフォントなどビルド時に決まる値をここに置く。
+// ------------------------------------------------------------
+
+// スライドの基準サイズ（16:9）。実際の表示は Deck が画面に合わせて拡大縮小する。
+$slide-width: 1280px;
+$slide-height: 720px;
+$slide-padding-y: 56px;
+$slide-padding-x: 80px;
+
+$font-sans: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic UI', system-ui, sans-serif;
+$font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+
+$radius-sm: 8px;
+$radius-md: 14px;
+$radius-lg: 20px;
+
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 24px;
+$space-6: 32px;
+$space-7: 48px;
+
+$font-size-xs: 15px;
+$font-size-sm: 18px;
+$font-size-md: 22px;
+$font-size-lg: 28px;
+$font-size-xl: 40px;
+$font-size-2xl: 56px;
+$font-size-3xl: 72px;
+
+$ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+$duration: 420ms;
+
+// コンポーネントで使う色調（tone）の一覧。
+// blue などは Sass では色の値として解釈されるので、文字列として引用符で囲む。
+$tones: 'accent', 'blue', 'green', 'yellow';

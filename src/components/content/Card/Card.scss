@@ -1,0 +1,61 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.card {
+  @include surface;
+  @include tone-modifiers;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: $space-5;
+  border-top: 5px solid var(--tone);
+
+  &.is-highlight {
+    background: var(--tone-soft);
+    border-color: var(--tone);
+  }
+
+  &__badge {
+    align-self: flex-start;
+    padding: 2px $space-3;
+    border-radius: 999px;
+    background: var(--tone-soft);
+    color: var(--tone);
+    font-size: $font-size-xs;
+    font-weight: 700;
+
+    .is-highlight & {
+      background: var(--tone);
+      color: var(--color-surface);
+    }
+  }
+
+  &__title {
+    font-size: $font-size-md;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  &__text {
+    font-size: $font-size-sm;
+    color: var(--color-muted);
+    line-height: 1.7;
+  }
+
+  &__list {
+    padding-left: 1.2em;
+    font-size: $font-size-sm;
+    line-height: 1.8;
+
+    li::marker {
+      color: var(--tone);
+    }
+  }
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  gap: $space-4;
+}

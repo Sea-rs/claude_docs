@@ -1,0 +1,56 @@
+// ------------------------------------------------------------
+// カラーテーマ（ライト / ダーク）
+// OS の設定に合わせて自動で切り替わる。
+// ------------------------------------------------------------
+
+:root {
+  color-scheme: light dark;
+
+  --color-page: #e9e4da;
+  --color-surface: #fffdf9;
+  --color-surface-2: #f5f1ea;
+  --color-text: #1f1d1a;
+  --color-muted: #6b655c;
+  --color-border: #e3dbcd;
+
+  --color-accent: #c4603d;
+  --color-accent-soft: #f8e5db;
+  --color-blue: #2f66b0;
+  --color-blue-soft: #e1ebf8;
+  --color-green: #2f8556;
+  --color-green-soft: #dff1e6;
+  --color-yellow: #a77a10;
+  --color-yellow-soft: #f8eed3;
+
+  --color-code-bg: #22201c;
+  --color-code-text: #efe9df;
+  --color-code-muted: #9b9488;
+  --color-code-key: #8fb8ef;
+  --color-code-accent: #f0a17f;
+
+  --shadow-slide: 0 20px 60px rgb(40 30 20 / 18%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-page: #0f0e0c;
+    --color-surface: #1c1a17;
+    --color-surface-2: #262320;
+    --color-text: #f1ece4;
+    --color-muted: #a9a297;
+    --color-border: #3a352f;
+
+    --color-accent: #ea8a66;
+    --color-accent-soft: #3d2a21;
+    --color-blue: #7fa9e6;
+    --color-blue-soft: #1f2b3d;
+    --color-green: #6cc493;
+    --color-green-soft: #1b3326;
+    --color-yellow: #e2b84d;
+    --color-yellow-soft: #392f17;
+
+    --color-code-bg: #12110f;
+
+    --shadow-slide: 0 20px 60px rgb(0 0 0 / 50%);
+  }
+}

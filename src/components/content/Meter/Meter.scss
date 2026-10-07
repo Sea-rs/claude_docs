@@ -1,0 +1,85 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.meter {
+  margin: 0;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: $space-2;
+  }
+
+  &__label {
+    font-size: $font-size-md;
+    font-weight: 700;
+  }
+
+  &__total {
+    font-size: $font-size-sm;
+    color: var(--color-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__bar {
+    display: flex;
+    gap: 3px;
+    height: 48px;
+    padding: 4px;
+    border-radius: $radius-md;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-2);
+  }
+
+  &__segment {
+    flex: 0 0 calc(var(--size) - 3px);
+    border-radius: 6px;
+
+    @each $tone in $tones {
+      &--#{$tone} {
+        background: tone-color($tone);
+      }
+    }
+
+    &.is-empty {
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent 0 6px,
+        var(--color-border) 6px 8px
+      );
+    }
+  }
+
+  &__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2 $space-5;
+    margin-top: $space-3;
+    padding: 0;
+    list-style: none;
+    font-size: $font-size-xs;
+  }
+
+  &__legend-item {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+  }
+
+  &__swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+
+    &.is-empty {
+      border: 1px solid var(--color-border);
+      background: var(--color-surface-2);
+    }
+  }
+
+  &__value {
+    color: var(--color-muted);
+    font-variant-numeric: tabular-nums;
+  }
+}

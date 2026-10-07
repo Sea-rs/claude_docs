@@ -1,0 +1,26 @@
+# 依存パッケージ
+node_modules/
+
+# ビルド成果物（npm run build / build:single で再生成できる）
+dist/
+dist-single/
+
+# エディタ・IDE の個人設定
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code の個人設定
+.claude/settings.local.json
+
+# OS が作るファイル
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ログ・環境変数
+*.log
+npm-debug.log*
+.env
+.env.*
