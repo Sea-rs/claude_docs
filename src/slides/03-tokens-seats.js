@@ -11,13 +11,13 @@ import {
   TokenDemo,
 } from '../components/index.js';
 
-const KICKER = '02 ／ トークンとシート';
+const KICKER = '03 ／ トークンとシート';
 
 export default {
-  section: '02 トークンとシート',
+  section: '03 トークンとシート',
   slides: [
     SectionSlide({
-      number: '02',
+      number: '03',
       title: 'トークンとシート',
       lead: 'AI の「量」と「契約」を表す、2つの基本用語',
     }),

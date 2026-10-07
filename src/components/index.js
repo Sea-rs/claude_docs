@@ -17,3 +17,4 @@ export { FileTree } from './content/FileTree/FileTree.js';
 export { TokenDemo } from './content/TokenDemo/TokenDemo.js';
 export { Meter } from './content/Meter/Meter.js';
 export { Timeline } from './content/Timeline/Timeline.js';
+export { VennDiagram } from './content/VennDiagram/VennDiagram.js';

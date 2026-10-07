@@ -174,6 +174,63 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      title: 'Claude の得意なこと・苦手なこと',
+      lead: '得意・不得意を知っておくと、任せどころと確認どころが分かります',
+      body: [
+        Columns({
+          ratio: '1fr 1fr',
+          left: Card({
+            badge: '得意',
+            title: '任せるとはかどる',
+            items: [
+              '知らないコードを読んで説明する',
+              'テスト・ドキュメントなど定型的な作成',
+              '同じ変更を多数のファイルに繰り返す',
+              'エラーの原因調査と修正案の提示',
+              '文章の要約・翻訳・整理',
+            ],
+            tone: 'green',
+            highlight: true,
+          }),
+          right: Card({
+            badge: '苦手・注意',
+            title: '人の確認や補助が必要',
+            items: [
+              '書かれていない社内ルールや背景は分からない',
+              '学習後の最新情報は知らない',
+              'もっともらしい間違いを言うことがある',
+              '長い作業で、最初の指示を忘れることがある',
+              '画面の見た目や実機での動作は自分で確かめられない',
+            ],
+            tone: 'yellow',
+            highlight: true,
+          }),
+        }),
+        Callout({
+          type: 'warn',
+          text: '最終的な判断と責任は人にあります。特に本番環境・お金・セキュリティに関わる変更は、必ず自分の目で確認しましょう。',
+        }),
+      ],
+    }),
+
+    ContentSlide({
+      kicker: KICKER,
+      title: '苦手なことは、使い方で補える',
+      body: CompareTable({
+        headers: ['苦手なこと', 'こう補う', '関連する章'],
+        highlightColumn: 1,
+        rows: [
+          ['社内ルールや背景を知らない', 'CLAUDE.md に書いておく', '第5章'],
+          ['最新情報を知らない', '公式ドキュメントの URL を渡す・調べさせる', '第2章（<code>@</code>）'],
+          ['もっともらしい間違い', 'テストを実行させる・根拠を聞く', '—'],
+          ['長い作業で指示を忘れる', '小さく区切る・<code>/clear</code> で仕切り直す', '第2・3章'],
+          ['見た目や実機の確認', '画面は自分で確認する・スクリーンショットを見せる', '—'],
+        ],
+      }),
+    }),
+
+    ContentSlide({
+      kicker: KICKER,
       title: 'はじめかた',
       body: Columns({
         ratio: '1fr 1fr',
@@ -198,18 +255,21 @@ claude
             text: '初回起動時にブラウザが開き、Claude のアカウントでログインします。',
           }),
         ],
-        right: CompareTable({
-          compact: true,
-          headers: ['操作', 'できること'],
-          rows: [
-            ['<code>/help</code>', '使えるコマンドの一覧'],
-            ['<code>/init</code>', 'CLAUDE.md のひな形を作る'],
-            ['<code>/clear</code>', '会話をリセットする'],
-            ['<code>/model</code>', 'モデルを切り替える'],
-            ['<code>Esc</code>', '実行中の作業を止める'],
-            ['<code>Shift</code>+<code>Tab</code>', 'モード切替（計画モードなど）'],
-          ],
-        }),
+        right: [
+          BulletList({
+            heading: '起動したら、まずこう話しかける',
+            numbered: true,
+            items: [
+              '「このプロジェクトの構成を教えて」',
+              '「README を読んで、動かし方を説明して」',
+              '小さな修正を1つ頼んでみる',
+            ],
+          }),
+          Callout({
+            type: 'tip',
+            text: '<code>/help</code> や <code>Esc</code> など、操作に使うコマンドは次の章でくわしく説明します。',
+          }),
+        ],
       }),
     }),
   ],

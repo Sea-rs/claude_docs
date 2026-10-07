@@ -14,30 +14,35 @@ export default {
       kicker: 'AGENDA',
       title: '今日お話しすること',
       body: CardGrid({
-        columns: 2,
+        columns: 3,
         cards: [
           Card({
             badge: '01',
             title: 'Claude とは？',
-            text: 'Claude と Claude Code の全体像、チャット AI との違い',
+            text: 'Claude と Claude Code の全体像、得意・不得意',
           }),
           Card({
             badge: '02',
-            title: 'トークンとシート',
-            text: 'AI の「量」を表すトークンと、組織向けプランの「シート」',
+            title: 'コマンド',
+            text: '起動コマンド、スラッシュコマンド、記号ショートカット',
             tone: 'blue',
           }),
           Card({
             badge: '03',
-            title: '利用制限',
-            text: '5時間・週ごとの上限の仕組みと、上手な付き合い方',
-            tone: 'yellow',
+            title: 'トークンとシート',
+            text: 'AI の「量」を表すトークンと、組織向けプランの「シート」',
+            tone: 'green',
           }),
           Card({
             badge: '04',
+            title: '利用制限',
+            text: '5時間・週ごとの上限と、コストが重くなる作業の例',
+            tone: 'yellow',
+          }),
+          Card({
+            badge: '05',
             title: 'スキルと md ファイル',
             text: 'CLAUDE.md・SKILL.md など、Claude Code を育てる設定ファイル',
-            tone: 'green',
           }),
         ],
       }),

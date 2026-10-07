@@ -7,16 +7,17 @@ import {
   CardGrid,
   Columns,
   CodeBlock,
+  CompareTable,
   Timeline,
 } from '../components/index.js';
 
-const KICKER = '03 ／ 利用制限';
+const KICKER = '04 ／ 利用制限';
 
 export default {
-  section: '03 利用制限',
+  section: '04 利用制限',
   slides: [
     SectionSlide({
-      number: '03',
+      number: '04',
       title: '利用制限',
       lead: '「使い放題」ではない理由と、上手な付き合い方',
     }),
@@ -105,6 +106,26 @@ export default {
           ],
         }),
       ],
+    }),
+
+    ContentSlide({
+      kicker: KICKER,
+      title: 'こんな作業はコストが重くなりやすい',
+      lead: '具体的な依頼の例と、軽くするコツ',
+      body: CompareTable({
+        compact: true,
+        headers: ['依頼・作業の例', '重さ', 'なぜ重い？', '軽くするコツ'],
+        highlightColumn: 1,
+        rows: [
+          ['「プロジェクト全体を見て直して」', '重い', '多数のファイルを読み込む', '対象のファイルやフォルダを指定する'],
+          ['何時間も同じ会話で作業を続ける', '重い', '履歴を毎回読み直す', '区切りで <code>/clear</code>・<code>/compact</code>'],
+          ['巨大なログや CSV をそのまま読ませる', '重い', '1ファイルで何万トークンにもなる', '必要な部分だけ抜き出して渡す'],
+          ['エラーが直るまで何度もやり直させる', 'やや重い', '失敗のたびに読み書きが増える', '原因を自分で絞ってから頼む'],
+          ['Opus で調査を何本も並行させる', '重い', '高性能モデル × 並列で倍々に増える', '調べものは軽いモデルに任せる'],
+          ['特定の関数の小さな修正・質問', '軽い', '読む範囲が小さい', 'そのままでOK'],
+        ],
+      }),
+      note: '※ 「重さ」は相対的な目安です。実際の消費量は <code>/usage</code> や <code>/context</code> で確認できます。',
     }),
 
     ContentSlide({

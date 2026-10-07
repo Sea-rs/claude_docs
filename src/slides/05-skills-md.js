@@ -8,15 +8,16 @@ import {
   CompareTable,
   FileTree,
   FlowDiagram,
+  VennDiagram,
 } from '../components/index.js';
 
-const KICKER = '04 ／ スキルと md ファイル';
+const KICKER = '05 ／ スキルと md ファイル';
 
 export default {
-  section: '04 スキルと md ファイル',
+  section: '05 スキルと md ファイル',
   slides: [
     SectionSlide({
-      number: '04',
+      number: '05',
       title: 'スキルと md ファイル',
       lead: 'Markdown ファイルに書いて、Claude Code を自分たち好みに「育てる」',
     }),
@@ -138,20 +139,34 @@ export default {
     ContentSlide({
       kicker: KICKER,
       title: 'CLAUDE.md は置く場所で効く範囲が変わる',
-      body: [
-        CompareTable({
-          headers: ['置き場所', '効く範囲', '向いている内容'],
-          rows: [
-            ['<code>~/.claude/CLAUDE.md</code>', 'すべてのプロジェクト', '自分の好み（言語・説明の細かさなど）'],
-            ['<code>./CLAUDE.md</code>', 'そのプロジェクト', 'チーム共通のルール（Git で共有）'],
-            ['<code>./src/api/CLAUDE.md</code>', 'そのフォルダで作業するとき', '特定の機能だけのルール'],
+      body: Columns({
+        ratio: '3fr 2fr',
+        align: 'center',
+        left: [
+          CompareTable({
+            compact: true,
+            headers: ['置き場所（CLAUDE.md）', '効く範囲', '向いている内容'],
+            rows: [
+              ['<code>~/.claude/</code>', 'すべてのプロジェクト', '自分の好み（言語など）'],
+              ['<code>./</code>', 'そのプロジェクト', 'チーム共通のルール'],
+              ['<code>./src/api/</code>', 'そのフォルダでの作業', '機能ごとのルール'],
+            ],
+          }),
+          Callout({
+            type: 'tip',
+            text: '<code>@docs/coding-rules.md</code> のように書くと別のファイルも読み込ませられます。<code>/memory</code> で開いて編集もできます。',
+          }),
+        ],
+        right: VennDiagram({
+          size: 260,
+          layers: [
+            { label: '全プロジェクト', sub: '~/.claude/' },
+            { label: 'このプロジェクト', sub: './' },
+            { label: 'このフォルダ', sub: './src/api/' },
           ],
+          caption: '内側で作業しているときは、外側のルールも一緒に効きます',
         }),
-        Callout({
-          type: 'tip',
-          text: 'CLAUDE.md の中に <code>@docs/coding-rules.md</code> のように書くと、別のファイルを読み込ませることもできます。<code>/memory</code> コマンドで開いて編集することも可能です。',
-        }),
-      ],
+      }),
     }),
 
     ContentSlide({

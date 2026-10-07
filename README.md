@@ -86,6 +86,7 @@ ContentSlide({
 | `TokenDemo` | トークン分割の図 |
 | `Meter` | 積み上げバー（コンテキストウィンドウの使用量など） |
 | `Timeline` | 横向きのタイムライン |
+| `VennDiagram` | 入れ子の円（範囲の包含関係を示す補足図） |
 
 色は `tone`（`accent` / `blue` / `green` / `yellow`）で指定できます。
 
