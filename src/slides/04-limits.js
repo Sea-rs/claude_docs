@@ -118,14 +118,14 @@ export default {
         highlightColumn: 1,
         rows: [
           ['「プロジェクト全体を見て直して」', '重い', '多数のファイルを読み込む', '対象のファイルやフォルダを指定する'],
-          ['何時間も同じ会話で作業を続ける', '重い', '履歴を毎回読み直す', '区切りで <code>/clear</code>・<code>/compact</code>'],
+          ['何時間も同じ会話で作業を続ける', '重い', '履歴を毎回読み直す', '区切りで新しい会話・<code>/compact</code>'],
           ['巨大なログや CSV をそのまま読ませる', '重い', '1ファイルで何万トークンにもなる', '必要な部分だけ抜き出して渡す'],
           ['エラーが直るまで何度もやり直させる', 'やや重い', '失敗のたびに読み書きが増える', '原因を自分で絞ってから頼む'],
           ['Opus で調査を何本も並行させる', '重い', '高性能モデル × 並列で倍々に増える', '調べものは軽いモデルに任せる'],
           ['特定の関数の小さな修正・質問', '軽い', '読む範囲が小さい', 'そのままでOK'],
         ],
       }),
-      note: '※ 「重さ」は相対的な目安です。実際の消費量は <code>/usage</code> や <code>/context</code> で確認できます。',
+      note: '※ 「重さ」は相対的な目安です。実際の消費量は <code>/usage</code> やプロンプト欄のコンテキスト表示で確認できます。',
     }),
 
     ContentSlide({
@@ -134,14 +134,20 @@ export default {
       body: Columns({
         ratio: '1fr 1fr',
         align: 'center',
-        left: CodeBlock({
-          filename: 'Claude Code の中で入力',
-          lang: 'shell',
-          code: `
+        left: [
+          CodeBlock({
+            filename: 'プロンプト欄に入力',
+            lang: 'shell',
+            code: `
 /usage     # プランの利用状況とリセット時刻
-/context   # コンテキストウィンドウの使用状況
+/status    # アカウントとモデルの確認
 `,
-        }),
+          }),
+          Callout({
+            type: 'info',
+            text: 'プロンプト欄の下のコンテキスト表示（<code>◔ 24%</code> など）で、机の使用率も分かります。',
+          }),
+        ],
         right: BulletList({
           items: [
             'claude.ai の「設定 → 使用量」からも確認できる',

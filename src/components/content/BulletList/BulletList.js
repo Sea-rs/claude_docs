@@ -3,12 +3,12 @@ import './BulletList.scss';
 
 /**
  * 箇条書き。項目は文字列、または { text, sub: string[] } で入れ子にできる。
- * @param {{ heading?: string, items: Array<string | { text: string, sub?: string[] }>, numbered?: boolean }} props
+ * @param {{ heading?: string, items: Array<string | { text: string, sub?: string[] }>, numbered?: boolean, size?: 'md'|'sm' }} props
  */
-export function BulletList({ heading, items, numbered = false }) {
+export function BulletList({ heading, items, numbered = false, size = 'md' }) {
   const tag = numbered ? 'ol' : 'ul';
   return html`
-    <div class="bullet-list ${numbered ? 'bullet-list--numbered' : ''}">
+    <div class="bullet-list ${numbered ? 'bullet-list--numbered' : ''} bullet-list--${size}">
       ${heading && html`<h3 class="bullet-list__heading">${heading}</h3>`}
       <${tag} class="bullet-list__items">
         ${items.map((item) => {

@@ -6,7 +6,6 @@ import {
   Card,
   CardGrid,
   Columns,
-  CodeBlock,
   CompareTable,
   FlowDiagram,
 } from '../components/index.js';
@@ -92,7 +91,7 @@ export default {
           Card({
             badge: '今日の主役',
             title: 'Claude Code',
-            text: 'ターミナル・エディタ（VS Code など）・デスクトップアプリで動く、開発者向けのツール',
+            text: 'VS Code などのエディタ拡張、ターミナル、デスクトップアプリで動く開発者向けのツール',
             highlight: true,
           }),
           Card({
@@ -125,7 +124,7 @@ export default {
           Callout({
             type: 'warn',
             title: '勝手に何でもするわけではない',
-            text: 'ファイルの変更やコマンドの実行の前には、原則としてあなたに許可を求めます。内容を確認してから「はい」を選びましょう。',
+            text: 'ファイルの変更やコマンドの実行の前には、原則として許可を求めます。VS Code では変更前後を並べた差分が開くので、内容を確認して承認・却下を選びましょう。',
           }),
           Callout({
             type: 'tip',
@@ -142,7 +141,7 @@ export default {
         headers: ['', 'チャット（claude.ai）', 'Claude Code'],
         highlightColumn: 2,
         rows: [
-          ['作業する場所', 'ブラウザやアプリの画面', 'ターミナル・エディタ'],
+          ['作業する場所', 'ブラウザやアプリの画面', 'VS Code などのエディタ内（ターミナルも可）'],
           ['コードの扱い', '回答をコピーして自分で貼り付ける', 'ファイルを直接読み書きする'],
           ['コマンド実行', 'あなたのパソコンでは実行しない', '実行して結果まで確認する'],
           ['見られる範囲', '会話に貼り付けた内容', 'プロジェクトのフォルダ全体'],
@@ -167,7 +166,7 @@ export default {
         }),
         Callout({
           type: 'tip',
-          text: '途中で方向がずれたら <code>Esc</code> キーで止めて、指示を出し直せます。',
+          text: '途中で方向がずれたら、Stop ボタンか <code>Esc</code> キーで止めて、指示を出し直せます。',
         }),
       ],
     }),
@@ -223,7 +222,7 @@ export default {
           ['社内ルールや背景を知らない', 'CLAUDE.md に書いておく', '第5章'],
           ['最新情報を知らない', '公式ドキュメントの URL を渡す・調べさせる', '第2章（<code>@</code>）'],
           ['もっともらしい間違い', 'テストを実行させる・根拠を聞く', '—'],
-          ['長い作業で指示を忘れる', '小さく区切る・<code>/clear</code> で仕切り直す', '第2・3章'],
+          ['長い作業で指示を忘れる', '小さく区切る・新しい会話で仕切り直す', '第2・3章'],
           ['見た目や実機の確認', '画面は自分で確認する・スクリーンショットを見せる', '—'],
         ],
       }),
@@ -231,46 +230,36 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
-      title: 'はじめかた',
-      body: Columns({
-        ratio: '1fr 1fr',
-        left: [
-          CodeBlock({
-            filename: 'ターミナル',
-            lang: 'shell',
-            code: `
-# インストール（macOS / Linux / WSL）
-curl -fsSL https://claude.ai/install.sh | bash
-
-# インストール（Windows PowerShell）
-irm https://claude.ai/install.ps1 | iex
-
-# プロジェクトのフォルダで起動
-cd my-project
-claude
-`,
-          }),
-          Callout({
+      title: 'はじめかた（VS Code 拡張機能）',
+      lead: 'この資料では、VS Code から使う方法を中心に説明します',
+      body: [
+        FlowDiagram({
+          steps: [
+            { title: '拡張機能を入れる', text: '<code>Ctrl</code>+<code>Shift</code>+<code>X</code> で「Claude Code」を検索して Install' },
+            { title: '✻ アイコンを押す', text: 'エディタ右上（ファイルを開いているとき）' },
+            { title: 'サインインする', text: 'ブラウザが開くので、Claude のアカウントで承認' },
+            { title: '話しかける', text: 'プロンプト欄に日本語で依頼を入力' },
+          ],
+        }),
+        Columns({
+          ratio: '1fr 1fr',
+          left: Callout({
             type: 'info',
-            text: '初回起動時にブラウザが開き、Claude のアカウントでログインします。',
+            title: '必要なもの',
+            text: 'VS Code 1.94.0 以降と、有料の Claude アカウント（Pro / Max / Team / Enterprise）または Console アカウント。',
           }),
-        ],
-        right: [
-          BulletList({
-            heading: '起動したら、まずこう話しかける',
-            numbered: true,
+          right: BulletList({
+            size: 'sm',
+            heading: 'まず試す依頼の例',
             items: [
               '「このプロジェクトの構成を教えて」',
               '「README を読んで、動かし方を説明して」',
               '小さな修正を1つ頼んでみる',
             ],
           }),
-          Callout({
-            type: 'tip',
-            text: '<code>/help</code> や <code>Esc</code> など、操作に使うコマンドは次の章でくわしく説明します。',
-          }),
-        ],
-      }),
+        }),
+      ],
+      note: '※ ターミナル（CLI）で使う方法は、次の章の最後で紹介します。',
     }),
   ],
 };

@@ -1,6 +1,7 @@
 # はじめての Claude Code（入門スライド）
 
 Claude Code を初めて使う人向けの、ブラウザで見られるスライド資料です。
+操作の説明は、VS Code の拡張機能で使う前提です（ターミナル版は第2章の最後で紹介）。
 HTML / SCSS / JavaScript（フレームワークなし）で作り、Vite でビルドします。
 
 ## 使い方
@@ -87,6 +88,7 @@ ContentSlide({
 | `Meter` | 積み上げバー（コンテキストウィンドウの使用量など） |
 | `Timeline` | 横向きのタイムライン |
 | `VennDiagram` | 入れ子の円（範囲の包含関係を示す補足図） |
+| `VscodeMock` | VS Code と Claude パネルのイメージ図（番号つき） |
 
 色は `tone`（`accent` / `blue` / `green` / `yellow`）で指定できます。
 

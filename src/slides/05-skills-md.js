@@ -107,7 +107,7 @@ export default {
             items: [
               'Claude Code の起動時に<strong>自動で読み込まれる</strong>',
               'プロジェクトの概要・ルール・よく使うコマンドを書く',
-              '<code>/init</code> で、コードを解析したひな形を自動生成できる',
+              '「CLAUDE.md を作って」と頼めば、コードを読んで下書きを作ってくれる',
               '新しく入ったメンバーに渡す「引き継ぎメモ」のイメージ',
             ],
           }),
@@ -154,7 +154,7 @@ export default {
           }),
           Callout({
             type: 'tip',
-            text: '<code>@docs/coding-rules.md</code> のように書くと別のファイルも読み込ませられます。<code>/memory</code> で開いて編集もできます。',
+            text: '<code>@docs/coding-rules.md</code> のように書くと別のファイルも読み込ませられます。<code>/</code> メニューの <strong>Customize → Instructions</strong> から開いて編集もできます。',
           }),
         ],
         right: VennDiagram({
@@ -251,7 +251,7 @@ description: 変更内容から日本語のコミットメッセージを作る�
           }),
           Callout({
             type: 'tip',
-            text: '<code>/agents</code> コマンドを使うと、対話しながら作成できます。',
+            text: 'Claude に「こういう役割のレビュー担当を作って」と頼めば、ファイルを作ってくれます。',
           }),
         ],
         right: CodeBlock({

@@ -6,7 +6,7 @@ export default {
     TitleSlide({
       eyebrow: '初心者向け入門講座',
       title: 'はじめての<br>Claude Code',
-      subtitle: 'AI と一緒に開発するための基礎知識',
+      subtitle: 'VS Code で AI と一緒に開発するための基礎知識',
       meta: '← → キーでページ送り ／ T キーで目次 ／ F キーで全画面',
     }),
 
@@ -23,8 +23,8 @@ export default {
           }),
           Card({
             badge: '02',
-            title: 'コマンド',
-            text: '起動コマンド、スラッシュコマンド、記号ショートカット',
+            title: 'VS Code での操作とコマンド',
+            text: 'パネルの使い方、@ と / の入力、ショートカット、巻き戻し',
             tone: 'blue',
           }),
           Card({

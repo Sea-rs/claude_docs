@@ -15,9 +15,9 @@ export default {
             text: 'ファイルを読み書きし、コマンドを実行して目的を達成する。得意・不得意を知って任せる',
           }),
           Card({
-            badge: '02 コマンド',
-            title: '/ @ ! を使いこなす',
-            text: '起動コマンド・スラッシュコマンド・記号ショートカットで操作する',
+            badge: '02 VS Code での操作',
+            title: '@ と / を使いこなす',
+            text: '許可のモード・差分の確認・巻き戻しで、安心して任せる',
             tone: 'blue',
           }),
           Card({
@@ -47,8 +47,8 @@ export default {
       body: CompareTable({
         headers: ['やってみよう', '参考になるページ'],
         rows: [
-          ['Claude Code をインストールして起動する', '<a href="https://code.claude.com/docs" target="_blank" rel="noopener">Claude Code ドキュメント</a>'],
-          ['<code>/init</code> で CLAUDE.md を作る', '<a href="https://code.claude.com/docs/en/memory" target="_blank" rel="noopener">CLAUDE.md（メモリ）の解説</a>'],
+          ['VS Code に拡張機能を入れて、✻ アイコンから起動する', '<a href="https://code.claude.com/docs/en/vs-code" target="_blank" rel="noopener">VS Code 拡張機能の解説</a>'],
+          ['Claude に頼んで CLAUDE.md を作ってもらう', '<a href="https://code.claude.com/docs/en/memory" target="_blank" rel="noopener">CLAUDE.md（メモリ）の解説</a>'],
           ['よくやる作業を1つスキルにしてみる', '<a href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">スキルの解説</a>'],
           ['自分に合ったプランを確認する', '<a href="https://claude.com/pricing" target="_blank" rel="noopener">料金プラン</a>'],
           ['困ったときに調べる', '<a href="https://support.claude.com" target="_blank" rel="noopener">ヘルプセンター</a>'],

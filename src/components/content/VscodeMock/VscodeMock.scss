@@ -1,0 +1,264 @@
+@use 'tokens' as *;
+
+// VS Code らしく見せるため、テーマに関係なく固定の暗い配色にする。
+$bg-editor: #1e1e1e;
+$bg-panel: #252526;
+$bg-activity: #333333;
+$bg-status: #007acc;
+$text: #d4d4d4;
+$muted: #858585;
+$select: #264f78;
+
+.vsmock {
+  position: relative;
+  margin: 0;
+  font-size: 12px;
+  color: $text;
+
+  &__window {
+    display: grid;
+    grid-template-columns: 34px 1fr 44%;
+    height: 330px;
+    border-radius: $radius-md $radius-md 0 0;
+    background: $bg-editor;
+    overflow: hidden;
+  }
+
+  &__activity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding-top: 12px;
+    background: $bg-activity;
+
+    span {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      border: 2px solid $muted;
+    }
+
+    .is-spark {
+      border: 0;
+      color: #d97757;
+      font-size: 18px;
+      line-height: 16px;
+      text-align: center;
+    }
+  }
+
+  &__editor {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__tabs {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 32px;
+    padding-right: 10px;
+    background: $bg-panel;
+  }
+
+  &__tab {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    background: $bg-editor;
+    border-top: 2px solid $bg-status;
+  }
+
+  &__spark {
+    position: relative;
+    color: #d97757;
+    font-size: 16px;
+  }
+
+  &__code {
+    position: relative;
+    flex: 1;
+    padding: 10px 0;
+  }
+
+  &__line {
+    display: flex;
+    align-items: center;
+    height: 24px;
+
+    &.is-selected {
+      background: $select;
+    }
+  }
+
+  &__no {
+    width: 30px;
+    padding-right: 10px;
+    text-align: right;
+    color: $muted;
+  }
+
+  &__bar {
+    display: block;
+    width: var(--w);
+    height: 8px;
+    margin-left: calc(var(--indent) * 16px);
+    border-radius: 4px;
+
+    &--a {
+      background: #569cd6;
+    }
+
+    &--b {
+      background: #ce9178;
+    }
+
+    &--c {
+      background: #4ec9b0;
+    }
+  }
+
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    padding: 10px;
+    gap: 10px;
+    background: $bg-panel;
+    border-left: 1px solid #3c3c3c;
+  }
+
+  &__chat {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__bubble {
+    margin: 0;
+    padding: 7px 10px;
+    border-radius: 8px;
+    line-height: 1.5;
+
+    b {
+      color: #4ec9b0;
+      font-weight: 600;
+    }
+
+    &--user {
+      align-self: flex-end;
+      max-width: 92%;
+      background: #3a3d41;
+    }
+
+    &--claude {
+      color: #c8c8c8;
+    }
+  }
+
+  &__prompt {
+    position: relative;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #5a5a5a;
+    background: $bg-editor;
+  }
+
+  &__input {
+    position: relative;
+    margin: 0 0 8px;
+    color: $muted;
+    line-height: 1.5;
+
+    b {
+      color: $text;
+    }
+  }
+
+  &__chips {
+    position: relative;
+    display: flex;
+    gap: 6px;
+
+    span {
+      padding: 1px 8px;
+      border-radius: 999px;
+      background: #3a3d41;
+      font-size: 11px;
+    }
+  }
+
+  &__status {
+    display: flex;
+    justify-content: space-between;
+    height: 22px;
+    padding: 0 12px;
+    align-items: center;
+    border-radius: 0 0 $radius-md $radius-md;
+    background: $bg-status;
+    color: #fff;
+    font-size: 11px;
+  }
+
+  &__status-claude {
+    position: relative;
+  }
+
+  &__caption {
+    margin-top: $space-2;
+    font-size: 13px;
+    color: var(--color-muted);
+  }
+
+  // 番号マーカー
+  &__marker {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    box-shadow: 0 0 0 2px $bg-editor;
+
+    &--1 {
+      top: -9px;
+      left: -22px;
+    }
+
+    &--2 {
+      top: 32px;
+      right: 12px;
+    }
+
+    &--3 {
+      bottom: -6px;
+      right: 2px;
+    }
+
+    &--4 {
+      top: -4px;
+      right: -16px;
+    }
+
+    &--5 {
+      top: -3px;
+      right: -16px;
+    }
+
+    &--6 {
+      top: -5px;
+      right: -28px;
+    }
+  }
+}
