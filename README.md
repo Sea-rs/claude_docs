@@ -1,7 +1,7 @@
 # はじめての Claude Code（入門スライド）
 
-Claude Code を初めて使う人向けの、ブラウザで見られるスライド資料です。
-操作の説明は、VS Code の拡張機能で使う前提です（ターミナル版は第2章の最後で紹介）。
+claude.ai（チャット）と Claude Code を初めて使う人向けの、ブラウザで見られるスライド資料です。
+Claude Code の操作説明は、VS Code の拡張機能で使う前提です（ターミナル版は第3章の最後で紹介）。
 HTML / SCSS / JavaScript（フレームワークなし）で作り、Vite でビルドします。
 
 ## 使い方
@@ -88,7 +88,26 @@ ContentSlide({
 | `Meter` | 積み上げバー（コンテキストウィンドウの使用量など） |
 | `Timeline` | 横向きのタイムライン |
 | `VennDiagram` | 入れ子の円（範囲の包含関係を示す補足図） |
+| `ScopeTag` / `ScopeLegend` | 「Claude Code 専用 / claude.ai 専用 / 共通」のラベルと、その凡例 |
 | `VscodeMock` | VS Code と Claude パネルのイメージ図（番号つき） |
+
+### 対応製品のラベル
+
+スライド・カード・章扉・表の中に、「その内容がどの製品で使えるか」を示すラベルを付けられます。
+
+| ラベル | 値 | 意味 |
+| --- | --- | --- |
+| Claude Code 専用 | `'code'` | Claude Code（VS Code 拡張機能・ターミナル）でだけ使える |
+| claude.ai 専用 | `'chat'` | claude.ai（Web・デスクトップ・モバイルのチャット）でだけ使える |
+| どちらでも使える（共通） | `'both'` | どちらでも使える |
+
+```js
+ContentSlide({ scope: 'code', title: '…', body: … });   // スライドの右上に表示
+Card({ scope: 'chat', title: '…' });                      // カードの右上に表示
+SectionSlide({ scope: 'both', number: '01', title: '…' }); // 章扉に表示
+```
+
+表やリストの文中に入れるときは `ScopeTag('code', { compact: true })` を文字列に埋め込みます。
 
 色は `tone`（`accent` / `blue` / `green` / `yellow`）で指定できます。
 

@@ -19,3 +19,4 @@ export { Meter } from './content/Meter/Meter.js';
 export { Timeline } from './content/Timeline/Timeline.js';
 export { VennDiagram } from './content/VennDiagram/VennDiagram.js';
 export { VscodeMock } from './content/VscodeMock/VscodeMock.js';
+export { ScopeTag, ScopeLegend } from './content/ScopeTag/ScopeTag.js';

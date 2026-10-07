@@ -9,24 +9,62 @@ import {
   CodeBlock,
   CompareTable,
   VscodeMock,
+  FlowDiagram,
 } from '../components/index.js';
 
-const KICKER = '02 ／ VS Code での操作とコマンド';
+const KICKER = '03 ／ VS Code での操作とコマンド';
 
 // キーボードショートカットの表記（例: kbd('Ctrl', 'Esc') → Ctrl+Esc）
 const kbd = (...keys) => keys.map((key) => `<code>${key}</code>`).join('+');
 
 export default {
-  section: '02 VS Code での操作とコマンド',
+  section: '03 VS Code での操作とコマンド',
   slides: [
     SectionSlide({
-      number: '02',
+      number: '03',
       title: 'VS Code での操作とコマンド',
       lead: 'この資料では、VS Code の拡張機能で Claude Code を使う前提で説明します',
+      scope: 'code',
     }),
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'code',
+      title: 'はじめかた（VS Code 拡張機能）',
+      lead: 'この資料では、VS Code から使う方法を中心に説明します',
+      body: [
+        FlowDiagram({
+          steps: [
+            { title: '拡張機能を入れる', text: '<code>Ctrl</code>+<code>Shift</code>+<code>X</code> で「Claude Code」を検索して Install' },
+            { title: '✻ アイコンを押す', text: 'エディタ右上（ファイルを開いているとき）' },
+            { title: 'サインインする', text: 'ブラウザが開くので、Claude のアカウントで承認' },
+            { title: '話しかける', text: 'プロンプト欄に日本語で依頼を入力' },
+          ],
+        }),
+        Columns({
+          ratio: '1fr 1fr',
+          left: Callout({
+            type: 'info',
+            title: '必要なもの',
+            text: 'VS Code 1.94.0 以降と、有料の Claude アカウント（Pro / Max / Team / Enterprise）または Console アカウント。',
+          }),
+          right: BulletList({
+            size: 'sm',
+            heading: 'まず試す依頼の例',
+            items: [
+              '「このプロジェクトの構成を教えて」',
+              '「README を読んで、動かし方を説明して」',
+              '小さな修正を1つ頼んでみる',
+            ],
+          }),
+        }),
+      ],
+      note: '※ ターミナル（CLI）で使う方法は、この章の最後で紹介します。',
+    }),
+
+    ContentSlide({
+      kicker: KICKER,
+      scope: 'code',
       title: '画面の見かた',
       lead: 'VS Code の中に Claude のパネルが並びます',
       body: Columns({
@@ -50,6 +88,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'code',
       title: 'Claude への伝え方',
       lead: '文章で頼むだけでなく、ファイルや選択範囲も一緒に渡せます',
       body: [
@@ -85,6 +124,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'code',
       title: '「/」メニューでできること',
       lead: 'プロンプト欄で <code>/</code> を入力すると、コマンドの候補が出ます',
       body: [
@@ -132,6 +172,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'code',
       title: '許可のしくみと、変更内容の確認',
       lead: 'Claude がファイルを変える前に、どこまで確認するかは「モード」で決まります',
       body: Columns({
@@ -163,6 +204,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'code',
       title: 'よく使うショートカット',
       lead: 'コマンドパレット（<code>Ctrl</code>+<code>Shift</code>+<code>P</code>）で「Claude Code」と入力すると、操作の一覧が出ます',
       body: CompareTable({
@@ -182,6 +224,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'code',
       title: '失敗しても巻き戻せる（チェックポイント）',
       lead: 'メッセージにマウスを乗せると出る巻き戻しボタンから、3つの戻し方を選べます',
       body: [
@@ -217,6 +260,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'code',
       title: 'ターミナル版（CLI）も使える',
       lead: 'VS Code のターミナル（<code>Ctrl</code>+<code>`</code>）で <code>claude</code> を実行すると、同じ Claude Code をコマンドで使えます',
       body: Columns({

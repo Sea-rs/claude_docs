@@ -6,24 +6,25 @@ import {
   Card,
   CardGrid,
   Columns,
-  CodeBlock,
   CompareTable,
   Timeline,
 } from '../components/index.js';
 
-const KICKER = '04 ／ 利用制限';
+const KICKER = '05 ／ 利用制限';
 
 export default {
-  section: '04 利用制限',
+  section: '05 利用制限',
   slides: [
     SectionSlide({
-      number: '04',
+      number: '05',
       title: '利用制限',
       lead: '「使い放題」ではない理由と、上手な付き合い方',
+      scope: 'both',
     }),
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: 'なぜ利用制限があるの？',
       body: Columns({
         ratio: '3fr 2fr',
@@ -48,6 +49,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: '上限は2種類ある',
       body: [
         CardGrid({
@@ -79,6 +81,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: '利用量を多く消費するもの',
       body: [
         CardGrid({
@@ -99,6 +102,7 @@ export default {
               tone: 'yellow',
             }),
             Card({
+              scope: 'code',
               title: '複数のエージェントの同時実行',
               text: 'サブエージェントを並行して動かすと、その分だけ消費が増える',
               tone: 'green',
@@ -110,7 +114,8 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
-      title: 'こんな作業はコストが重くなりやすい',
+      scope: 'code',
+      title: 'Claude Code：コストが重くなりやすい作業',
       lead: '具体的な依頼の例と、軽くするコツ',
       body: CompareTable({
         compact: true,
@@ -130,36 +135,64 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
-      title: '利用状況を確認する',
-      body: Columns({
-        ratio: '1fr 1fr',
-        align: 'center',
-        left: [
-          CodeBlock({
-            filename: 'プロンプト欄に入力',
-            lang: 'shell',
-            code: `
-/usage     # プランの利用状況とリセット時刻
-/status    # アカウントとモデルの確認
-`,
-          }),
-          Callout({
-            type: 'info',
-            text: 'プロンプト欄の下のコンテキスト表示（<code>◔ 24%</code> など）で、机の使用率も分かります。',
-          }),
+      scope: 'chat',
+      title: 'claude.ai：利用量が増えやすい使い方',
+      lead: '長さ・添付・ツール・モデルが、利用量に効いてきます',
+      body: CompareTable({
+        compact: true,
+        headers: ['使い方の例', '重さ', 'なぜ重い？', '軽くするコツ'],
+        highlightColumn: 1,
+        rows: [
+          ['1つのチャットを延々と続ける', '重い', '履歴が毎回読み直される', '話題が変わったら新しいチャットにする'],
+          ['大きなファイルを何度も添付する', '重い', '添付の大きさが毎回数えられる', 'Projects にまとめて登録して使い回す'],
+          ['リサーチや Web 検索を多用する', '重い', '複数の情報源を調べてまとめる', '調べたい範囲を絞って依頼する'],
+          ['高性能なモデルを常用する', 'やや重い', '同じ作業でも消費が大きい', '軽いモデルで足りるか試す'],
+          ['1つずつ細かく質問を重ねる', 'やや重い', 'やり取りの回数だけ読み直しが増える', '関連する質問は1回にまとめる'],
+          ['短い質問・短い文章の相談', '軽い', '処理する量が小さい', 'そのままでOK'],
         ],
-        right: BulletList({
-          items: [
-            'claude.ai の「設定 → 使用量」からも確認できる',
-            '上限が近づくと、Claude Code の画面に警告が表示される',
-            '上限に達したときは、リセットされる時刻が表示される',
-          ],
-        }),
       }),
+      note: '※ 実際の消費量は、claude.ai の「設定 → 使用量」で確認できます。',
     }),
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
+      title: '利用状況を確認する',
+      lead: '使っている場所によって、確認のしかたが違います',
+      body: [
+        Columns({
+          ratio: '1fr 1fr',
+          left: Card({
+            scope: 'chat',
+            title: '設定画面で確認',
+            items: [
+              '「設定 → 使用量」を開く',
+              '5時間ごとの枠と週ごとの上限の進み具合が見える',
+              '有料プランでは追加利用の状況も確認できる',
+            ],
+            tone: 'blue',
+          }),
+          right: Card({
+            scope: 'code',
+            title: 'コマンドと表示で確認',
+            items: [
+              'プロンプト欄で <code>/usage</code> を入力',
+              'プロンプト欄の下のコンテキスト表示（<code>◔ 24%</code>）で作業机の使用率が分かる',
+              '上限が近づくと画面に警告が出る',
+            ],
+            highlight: true,
+          }),
+        }),
+        Callout({
+          type: 'info',
+          text: '利用枠は共通なので、どちらで確認しても同じプランの上限の話です。上限に達すると、リセットされる時刻が表示されます。',
+        }),
+      ],
+    }),
+
+    ContentSlide({
+      kicker: KICKER,
+      scope: 'both',
       title: '上限に達してしまったら？',
       body: [
         CardGrid({

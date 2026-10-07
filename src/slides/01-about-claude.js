@@ -8,6 +8,7 @@ import {
   Columns,
   CompareTable,
   FlowDiagram,
+  ScopeTag,
 } from '../components/index.js';
 
 const KICKER = '01 ／ Claude とは？';
@@ -18,11 +19,13 @@ export default {
     SectionSlide({
       number: '01',
       title: 'Claude とは？',
-      lead: 'Claude と Claude Code の全体像をつかもう',
+      lead: 'claude.ai と Claude Code、2つの使い方の全体像をつかもう',
+      scope: 'both',
     }),
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: 'Claude は Anthropic が開発した AI アシスタント',
       body: Columns({
         ratio: '3fr 2fr',
@@ -44,6 +47,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: 'モデルは用途に合わせて3種類',
       lead: '同じ Claude でも「頭脳」の種類を選べます',
       body: [
@@ -71,7 +75,7 @@ export default {
         }),
         Callout({
           type: 'info',
-          text: 'Claude Code では <code>/model</code> コマンドでモデルを切り替えられます。高性能なモデルほど、利用量（後述）の消費も大きくなります。',
+          text: 'claude.ai では入力欄のモデル選択から、Claude Code では <code>/model</code> でモデルを切り替えられます。高性能なモデルほど、利用量（後述）の消費も大きくなります。',
         }),
       ],
     }),
@@ -85,17 +89,17 @@ export default {
           Card({
             badge: 'だれでも',
             title: 'claude.ai',
-            text: 'Web ブラウザ・デスクトップアプリ・スマホアプリで使えるチャット形式の Claude',
+            text: 'Web ブラウザ・デスクトップアプリ・スマホアプリで使えるチャット形式の Claude（第2章）',
             tone: 'blue',
           }),
           Card({
-            badge: '今日の主役',
+            badge: 'コードを書く人に',
             title: 'Claude Code',
-            text: 'VS Code などのエディタ拡張、ターミナル、デスクトップアプリで動く開発者向けのツール',
+            text: 'VS Code などのエディタ拡張やターミナルで動く、コードを書く人向けのツール（第3章）',
             highlight: true,
           }),
           Card({
-            badge: '開発者向け',
+            badge: 'システム連携',
             title: 'Claude API',
             text: '自分たちのサービスやアプリに Claude を組み込むためのプログラム用の窓口',
             tone: 'green',
@@ -106,6 +110,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'code',
       title: 'Claude Code とは？',
       lead: 'あなたのパソコンの中で、実際に手を動かしてくれる「エージェント型」のコーディングアシスタント',
       body: Columns({
@@ -152,6 +157,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'code',
       title: 'エージェントはこう動く',
       lead: '1回答えて終わりではなく、目的を達成するまで自分で考えて行動を繰り返します',
       body: [
@@ -173,6 +179,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: 'Claude の得意なこと・苦手なこと',
       lead: '得意・不得意を知っておくと、任せどころと確認どころが分かります',
       body: [
@@ -214,52 +221,19 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: '苦手なことは、使い方で補える',
       body: CompareTable({
         headers: ['苦手なこと', 'こう補う', '関連する章'],
         highlightColumn: 1,
         rows: [
-          ['社内ルールや背景を知らない', 'CLAUDE.md に書いておく', '第5章'],
-          ['最新情報を知らない', '公式ドキュメントの URL を渡す・調べさせる', '第2章（<code>@</code>）'],
+          ['社内ルールや背景を知らない', `Project instructions に書く ${ScopeTag('chat', { compact: true })}<br>CLAUDE.md に書く ${ScopeTag('code', { compact: true })}`, '第6章'],
+          ['最新情報を知らない', 'Web 検索を使う・公式ドキュメントの URL を渡す', '第2・3章'],
           ['もっともらしい間違い', 'テストを実行させる・根拠を聞く', '—'],
-          ['長い作業で指示を忘れる', '小さく区切る・新しい会話で仕切り直す', '第2・3章'],
+          ['長い作業で指示を忘れる', '小さく区切る・新しい会話で仕切り直す', '第4章'],
           ['見た目や実機の確認', '画面は自分で確認する・スクリーンショットを見せる', '—'],
         ],
       }),
-    }),
-
-    ContentSlide({
-      kicker: KICKER,
-      title: 'はじめかた（VS Code 拡張機能）',
-      lead: 'この資料では、VS Code から使う方法を中心に説明します',
-      body: [
-        FlowDiagram({
-          steps: [
-            { title: '拡張機能を入れる', text: '<code>Ctrl</code>+<code>Shift</code>+<code>X</code> で「Claude Code」を検索して Install' },
-            { title: '✻ アイコンを押す', text: 'エディタ右上（ファイルを開いているとき）' },
-            { title: 'サインインする', text: 'ブラウザが開くので、Claude のアカウントで承認' },
-            { title: '話しかける', text: 'プロンプト欄に日本語で依頼を入力' },
-          ],
-        }),
-        Columns({
-          ratio: '1fr 1fr',
-          left: Callout({
-            type: 'info',
-            title: '必要なもの',
-            text: 'VS Code 1.94.0 以降と、有料の Claude アカウント（Pro / Max / Team / Enterprise）または Console アカウント。',
-          }),
-          right: BulletList({
-            size: 'sm',
-            heading: 'まず試す依頼の例',
-            items: [
-              '「このプロジェクトの構成を教えて」',
-              '「README を読んで、動かし方を説明して」',
-              '小さな修正を1つ頼んでみる',
-            ],
-          }),
-        }),
-      ],
-      note: '※ ターミナル（CLI）で使う方法は、次の章の最後で紹介します。',
     }),
   ],
 };

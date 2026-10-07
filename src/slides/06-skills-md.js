@@ -9,21 +9,24 @@ import {
   FileTree,
   FlowDiagram,
   VennDiagram,
+  ScopeTag,
 } from '../components/index.js';
 
-const KICKER = '05 ／ スキルと md ファイル';
+const KICKER = '06 ／ スキルと md ファイル';
 
 export default {
-  section: '05 スキルと md ファイル',
+  section: '06 スキルと md ファイル',
   slides: [
     SectionSlide({
-      number: '05',
+      number: '06',
       title: 'スキルと md ファイル',
-      lead: 'Markdown ファイルに書いて、Claude Code を自分たち好みに「育てる」',
+      lead: 'Markdown ファイルに書いて、Claude を自分たち好みに「育てる」',
+      scope: 'both',
     }),
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: 'Markdown（.md）ファイルとは？',
       body: Columns({
         ratio: '1fr 1fr',
@@ -62,6 +65,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'code',
       title: 'Claude Code で使う主なファイル',
       body: Columns({
         ratio: '3fr 2fr',
@@ -99,6 +103,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'code',
       title: 'CLAUDE.md ＝ プロジェクトの取扱説明書',
       body: Columns({
         ratio: '1fr 1fr',
@@ -138,6 +143,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'code',
       title: 'CLAUDE.md は置く場所で効く範囲が変わる',
       body: Columns({
         ratio: '3fr 2fr',
@@ -171,18 +177,27 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: 'スキルとは？',
       lead: '特定の作業のやり方をまとめた「手順書」のパッケージ',
       body: Columns({
         ratio: '1fr 1fr',
-        left: BulletList({
-          items: [
-            '<code>.claude/skills/スキル名/SKILL.md</code> に置く',
-            '依頼内容に合えば Claude が<strong>自動で使う</strong>',
-            '<code>/スキル名</code> と入力して直接呼び出すこともできる',
-            'スクリプトやテンプレートなどの補助ファイルも同じフォルダに置ける',
-          ],
-        }),
+        left: [
+          BulletList({
+            size: 'sm',
+            items: [
+              `<code>.claude/skills/スキル名/SKILL.md</code> に置く ${ScopeTag('code', { compact: true })}`,
+              '依頼内容に合えば Claude が<strong>自動で使う</strong>',
+              '<code>/スキル名</code> と入力して直接呼び出すこともできる',
+              'スクリプトやテンプレートなどの補助ファイルも同じフォルダに置ける',
+            ],
+          }),
+          Callout({
+            type: 'info',
+            title: `claude.ai で使うには ${ScopeTag('chat', { compact: true })}`,
+            text: '「Customize → Skills」から、スキルのフォルダを ZIP にしてアップロードします。コード実行とファイル作成の機能を有効にしておく必要があります。',
+          }),
+        ],
         right: FlowDiagram({
           direction: 'vertical',
           steps: [
@@ -196,6 +211,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: 'SKILL.md の書き方',
       body: Columns({
         ratio: '1fr 1fr',
@@ -237,6 +253,7 @@ description: 変更内容から日本語のコミットメッセージを作る�
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'code',
       title: 'サブエージェント（.claude/agents/*.md）',
       lead: '特定の役割を持った「専門家」を定義して、作業を任せる仕組み',
       body: Columns({
@@ -274,7 +291,8 @@ tools: Read, Grep, Glob
 
     ContentSlide({
       kicker: KICKER,
-      title: '使い分けのまとめ',
+      scope: 'code',
+      title: 'Claude Code：md ファイルの使い分け',
       body: [
         CompareTable({
           headers: ['種類', 'ファイル', '読み込まれるタイミング', '向いている内容'],
@@ -288,6 +306,30 @@ tools: Read, Grep, Glob
         Callout({
           type: 'info',
           text: '以前からある「カスタムコマンド」（<code>.claude/commands/*.md</code>）も使えますが、今は同じことをスキルで作るのがおすすめです。',
+        }),
+      ],
+    }),
+
+    ContentSlide({
+      kicker: KICKER,
+      scope: 'both',
+      title: 'claude.ai と Claude Code の対応表',
+      lead: '同じ「やりたいこと」を、それぞれどこで設定するか',
+      body: [
+        CompareTable({
+          compact: true,
+          headers: ['やりたいこと', 'claude.ai', 'Claude Code'],
+          rows: [
+            ['常に守ってほしいルール', 'Project instructions（指示）', '<code>CLAUDE.md</code>'],
+            ['参考にさせる資料', 'Project knowledge・ファイル添付', '<code>@</code> でファイルを指定'],
+            ['作業の手順書', 'Skills（ZIP をアップロード）', 'Skills（<code>.claude/skills/</code>）'],
+            ['外部サービスとの連携', 'コネクタ', 'MCP サーバー（<code>/mcp</code>）'],
+            ['成果物の置き場所', 'Artifacts（チャットの横）', 'プロジェクトのファイルを直接編集'],
+          ],
+        }),
+        Callout({
+          type: 'tip',
+          text: 'SKILL.md の書き方は共通です。考え方（「覚えさせる」「手順書にする」）が同じなので、片方に慣れればもう片方も使いこなせます。',
         }),
       ],
     }),

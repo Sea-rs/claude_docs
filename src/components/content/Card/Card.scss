@@ -16,6 +16,12 @@
     border-color: var(--tone);
   }
 
+  &__scope {
+    position: absolute;
+    top: $space-3;
+    right: $space-3;
+  }
+
   &__badge {
     align-self: flex-start;
     padding: 2px $space-3;

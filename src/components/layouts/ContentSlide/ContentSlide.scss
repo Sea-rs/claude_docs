@@ -5,8 +5,16 @@
     margin-bottom: $space-6;
   }
 
-  &__kicker {
+  // 章名（左）と対応製品のラベル（右）を1行に並べる
+  &__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-4;
     margin-bottom: $space-2;
+  }
+
+  &__kicker {
     font-size: $font-size-xs;
     font-weight: 700;
     letter-spacing: 0.1em;

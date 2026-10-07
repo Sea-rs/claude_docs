@@ -1,0 +1,55 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.scope-tag {
+  @include tone-modifiers;
+  display: inline-block;
+  flex: none;
+  padding: 2px $space-3;
+  border: 1.5px solid var(--tone);
+  border-radius: 999px;
+  background: var(--tone-soft);
+  color: var(--tone);
+  font-size: $font-size-xs;
+  font-weight: 700;
+  line-height: 1.5;
+  white-space: nowrap;
+  // 章扉などの大文字化・字間指定を引き継がない（claude.ai が CLAUDE.AI にならないように）
+  text-transform: none;
+  letter-spacing: normal;
+
+  // 表やカードの中に置く小さいサイズ
+  &--compact {
+    padding: 0 $space-2;
+    font-size: 13px;
+    vertical-align: 2px;
+  }
+}
+
+.scope-legend {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &__row {
+    @include surface;
+    display: flex;
+    align-items: center;
+    gap: $space-5;
+    padding: $space-4 $space-5;
+
+    .scope-tag {
+      min-width: 190px;
+      padding: $space-1 $space-4;
+      text-align: center;
+      font-size: $font-size-sm;
+    }
+  }
+
+  &__text {
+    font-size: $font-size-md;
+  }
+}

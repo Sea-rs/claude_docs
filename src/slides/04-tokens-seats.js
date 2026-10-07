@@ -11,19 +11,21 @@ import {
   TokenDemo,
 } from '../components/index.js';
 
-const KICKER = '03 ／ トークンとシート';
+const KICKER = '04 ／ トークンとシート';
 
 export default {
-  section: '03 トークンとシート',
+  section: '04 トークンとシート',
   slides: [
     SectionSlide({
-      number: '03',
+      number: '04',
       title: 'トークンとシート',
       lead: 'AI の「量」と「契約」を表す、2つの基本用語',
+      scope: 'both',
     }),
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: 'トークンとは？',
       lead: 'AI が文章を読み書きするときの最小単位。文章は細かい「かけら」に分けて処理されます',
       body: [
@@ -43,6 +45,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: '入力トークンと出力トークン',
       lead: 'AI の利用量や料金は「どれだけのトークンを処理したか」で決まります',
       body: [
@@ -77,6 +80,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: 'コンテキストウィンドウ = AI の作業机',
       lead: 'Claude が一度に覚えておける情報量の上限。標準的なモデルで約20万トークン',
       body: [
@@ -93,35 +97,40 @@ export default {
         }),
         Callout({
           type: 'info',
-          text: '机がいっぱいになると、古い会話が自動で要約されて場所が空けられます（自動コンパクト）。そのとき細かい情報が抜け落ちることも。VS Code では、プロンプト欄の下のコンテキスト表示（<code>◔ 24%</code> のようなマーク）で今の使用状況を確認できます。',
+          text: '机がいっぱいになると、古い会話が自動で要約されて場所が空けられます（自動コンパクト）。そのとき細かい情報が抜け落ちることも。Claude Code（VS Code）では、プロンプト欄の下のコンテキスト表示（<code>◔ 24%</code> のようなマーク）で今の使用状況を確認できます。',
         }),
       ],
     }),
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: 'トークンを節約するコツ',
       body: CardGrid({
         columns: 2,
         cards: [
           Card({
+            scope: 'both',
             badge: '新しい会話',
             title: '作業ごとに会話を区切る',
             text: '別の作業に移るときは新しい会話を始める。関係ない履歴を読み直さずに済みます',
           }),
           Card({
+            scope: 'code',
             badge: '/compact',
             title: '長い会話は要約する',
             text: '続きの作業が必要なときは、会話を要約して机の上を片付けます',
             tone: 'blue',
           }),
           Card({
+            scope: 'both',
             badge: '具体的に',
             title: '場所や対象をはっきり伝える',
             text: '「src/login.js の送信処理」のように指定すると、余計なファイルを探し回らずに済みます',
             tone: 'green',
           }),
           Card({
+            scope: 'code',
             badge: 'CLAUDE.md',
             title: '設定ファイルは簡潔に',
             text: '毎回読み込まれるので、本当に必要なルールだけを書きます',
@@ -133,6 +142,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: 'シートとは？',
       lead: '組織向けプランでの「1人分の利用権（ライセンス）」のこと',
       body: Columns({
@@ -153,12 +163,14 @@ export default {
         ],
         right: [
           Card({
+            scope: 'chat',
             badge: 'Standard シート',
             title: 'チャット中心の標準シート',
             text: 'claude.ai でのチャットや共同作業機能が中心。費用を抑えたいメンバー向け',
             tone: 'blue',
           }),
           Card({
+            scope: 'code',
             badge: 'Premium シート',
             title: 'Claude Code まで使えるシート',
             text: 'Claude Code を含み、利用量も多い。開発者にはこちらを割り当てます',
@@ -170,6 +182,7 @@ export default {
 
     ContentSlide({
       kicker: KICKER,
+      scope: 'both',
       title: 'プランの全体像',
       body: CompareTable({
         compact: true,
