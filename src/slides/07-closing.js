@@ -32,7 +32,7 @@ export default {
           Card({
             badge: '04 トークンとシート',
             title: 'トークン = 量の単位',
-            text: 'シートは組織プランでの1人分の利用権。Team で Claude Code を使うなら Premium',
+            text: 'シートは組織プランでの1人分の利用権。Team は Standard と Premium で利用量の上限が違う',
             tone: 'green',
             scope: 'both',
           }),
