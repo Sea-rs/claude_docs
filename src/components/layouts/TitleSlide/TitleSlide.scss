@@ -38,6 +38,15 @@
     pointer-events: none;
   }
 
+  // 位置指定のある装飾（円）が文字の上に描かれて、文字を隠さないように前面に出す
+  &__eyebrow,
+  &__title,
+  &__subtitle,
+  &__meta {
+    position: relative;
+    z-index: 1;
+  }
+
   &__eyebrow {
     align-self: flex-start;
     padding: $space-1 $space-4;
@@ -59,6 +68,19 @@
   &__subtitle {
     font-size: $font-size-lg;
     color: var(--color-muted);
+  }
+
+  // 制作元の表記（スライド左下に小さく）
+  &__credit {
+    position: absolute;
+    left: $space-6;
+    bottom: 0;
+    font-size: $font-size-xs;
+    color: var(--color-muted);
+
+    span {
+      color: var(--color-accent);
+    }
   }
 
   &__meta {

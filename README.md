@@ -29,16 +29,19 @@ URL の `#/5` のような部分がページ番号になっているので、特
 ## フォルダ構成
 
 ```
+public/
+└── videos/                 スライドで使う動画（とサムネ画像）を置くフォルダ
 src/
 ├── main.js                 エントリーポイント
 ├── core/
-│   ├── Deck.js / .scss     ページ送り・拡大縮小・キーボード操作
-│   └── html.js             HTML を組み立てる小さなヘルパー
+│   ├── Deck.js / .scss     ページ送り・拡大縮小・キーボード操作・動画モーダルの連携
+│   ├── html.js             HTML を組み立てる小さなヘルパー
+│   └── media.js            動画フォルダの場所と URL の組み立て
 ├── components/
 │   ├── index.js            部品をまとめて export
 │   ├── layouts/            スライドの型（表紙・中扉・本文）
-│   ├── content/            スライドの中に置く部品（カード・表・図など）
-│   └── ui/                 操作パネル・進捗バー・目次
+│   ├── content/            スライドの中に置く部品（カード・表・図・動画サムネなど）
+│   └── ui/                 操作パネル・進捗バー・目次・動画モーダル
 ├── slides/                 スライドの内容（章ごとに1ファイル）
 └── styles/
     ├── _tokens.scss        サイズ・フォントなどのデザイントークン
@@ -88,8 +91,37 @@ ContentSlide({
 | `Meter` | 積み上げバー（コンテキストウィンドウの使用量など） |
 | `Timeline` | 横向きのタイムライン |
 | `VennDiagram` | 入れ子の円（範囲の包含関係を示す補足図） |
+| `VideoThumb` | 動画のサムネ。クリックでモーダルを開いて再生（`public/videos/` の動画を呼び出す） |
 | `ScopeTag` / `ScopeLegend` | 「Claude Code 専用 / claude.ai 専用 / 共通」のラベルと、その凡例 |
 | `VscodeMock` | VS Code と Claude パネルのイメージ図（番号つき） |
+
+### 動画を載せる
+
+動画は **`public/videos/`** フォルダに置き、スライドからはファイル名で呼び出します。
+サムネをクリックすると、画面中央のモーダルで再生されます（Esc・×・背景クリックで閉じる）。
+
+```js
+import { ContentSlide, Columns, BulletList, VideoThumb } from '../components/index.js';
+
+ContentSlide({
+  title: 'インストールの流れ',
+  body: Columns({
+    left: BulletList({ items: ['拡張機能を入れる', 'サインインする'] }),
+    right: VideoThumb({
+      file: 'install.mp4',        // public/videos/install.mp4
+      poster: 'install.jpg',      // 省略可。省略すると動画の最初のコマをサムネにする
+      title: 'インストールのデモ',  // モーダルの見出し
+      caption: 'クリックで再生',    // 省略可
+    }),
+  }),
+});
+```
+
+- ファイルが見つからないときは、サムネに「動画ファイルが見つかりません」と表示されます。
+- `npm run build` で `dist/videos/`、`npm run build:single` で `dist-single/videos/` にコピーされます。
+  **`build:single` の HTML は、同じ場所の `videos/` フォルダごと配布してください**（動画は HTML に埋め込まれません）。
+- 動画は容量が大きくなりがちです。GitHub は 1 ファイル 100MB までなので、大きい場合は圧縮するか、リポジトリに入れずに別途配布してください。
+- ブラウザで再生できる形式（mp4 / H.264 がおすすめ）を使ってください。
 
 ### 対応製品のラベル
 

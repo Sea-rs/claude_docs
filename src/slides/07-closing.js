@@ -93,6 +93,7 @@ export default {
       eyebrow: 'THANK YOU',
       title: 'まずは小さな作業から<br>任せてみましょう',
       subtitle: 'ご清聴ありがとうございました',
+      credit: 'このスライドは Claude Code によって作成されました',
     }),
   ],
 };

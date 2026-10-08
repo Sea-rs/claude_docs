@@ -2,6 +2,7 @@ import { html, escapeHtml, stripTags } from './html.js';
 import { createProgressBar } from '../components/ui/ProgressBar/ProgressBar.js';
 import { createControls } from '../components/ui/Controls/Controls.js';
 import { createTocPanel } from '../components/ui/TocPanel/TocPanel.js';
+import { createVideoModal } from '../components/ui/VideoModal/VideoModal.js';
 import './Deck.scss';
 
 const SLIDE_WIDTH = 1280;
@@ -64,7 +65,8 @@ export class Deck {
         this.toc.close();
       },
     });
-    this.deckEl.append(this.progress.el, this.controls.el, this.toc.el);
+    this.videoModal = createVideoModal();
+    this.deckEl.append(this.progress.el, this.controls.el, this.toc.el, this.videoModal.el);
 
     this.bindEvents();
     this.fit();
@@ -129,6 +131,25 @@ export class Deck {
     window.addEventListener('keydown', (e) => this.onKeydown(e));
     window.addEventListener('pointermove', () => this.wake());
 
+    // 動画サムネ（VideoThumb）のクリックでモーダルを開く
+    this.deckEl.addEventListener('click', (e) => {
+      const thumb = e.target.closest('[data-video-src]');
+      if (!thumb) return;
+      this.videoModal.open({
+        src: thumb.dataset.videoSrc,
+        title: thumb.dataset.videoTitle,
+        trigger: thumb,
+      });
+    });
+
+    // サムネ画像・動画を読み込めなかったときは、「見つかりません」の案内に切り替える
+    // （error イベントはバブリングしないので、キャプチャ段階で受ける）
+    this.deckEl.addEventListener(
+      'error',
+      (e) => e.target.closest?.('.video-thumb')?.classList.add('is-missing'),
+      true,
+    );
+
     let touchStartX = null;
     this.deckEl.addEventListener(
       'touchstart',
@@ -138,7 +159,7 @@ export class Deck {
       { passive: true },
     );
     this.deckEl.addEventListener('touchend', (e) => {
-      if (touchStartX === null) return;
+      if (touchStartX === null || this.videoModal.isOpen()) return;
       const dx = e.changedTouches[0].clientX - touchStartX;
       if (Math.abs(dx) > SWIPE_THRESHOLD_PX) {
         dx < 0 ? this.next() : this.prev();
@@ -148,6 +169,13 @@ export class Deck {
   }
 
   onKeydown(e) {
+    // 動画モーダルを開いている間は、スライド送りなどのキー操作を止める
+    // （Space・矢印キーは動画プレイヤー自身の操作に使われる）
+    if (this.videoModal.isOpen()) {
+      if (e.key === 'Escape') this.videoModal.close();
+      return;
+    }
+
     if (e.altKey || e.ctrlKey || e.metaKey) return;
 
     if (e.key === 'Escape' && this.toc.isOpen()) {
