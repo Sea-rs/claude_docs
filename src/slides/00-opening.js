@@ -27,7 +27,7 @@ export default {
           Card({
             badge: '01',
             title: 'Claude とは？',
-            text: 'Claude の全体像、モデル、得意・不得意',
+            text: 'Claude の全体像、モデル、得意・不得意、知識カットオフ',
           }),
           Card({
             badge: '02',

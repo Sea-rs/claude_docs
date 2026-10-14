@@ -9,6 +9,7 @@ import {
   CompareTable,
   FlowDiagram,
   ScopeTag,
+  Timeline,
 } from '../components/index.js';
 
 const KICKER = '01 ／ Claude とは？';
@@ -203,7 +204,7 @@ export default {
             title: '人の確認や補助が必要',
             items: [
               '書かれていない社内ルールや背景は分からない',
-              '学習後の最新情報は知らない',
+              '知識カットオフ（学習データの期限）より新しい情報は知らない',
               'もっともらしい間違いを言うことがある',
               '長い作業で、最初の指示を忘れることがある',
               '画面の見た目や実機での動作は自分で確かめられない',
@@ -222,13 +223,62 @@ export default {
     ContentSlide({
       kicker: KICKER,
       scope: 'both',
+      title: '知識カットオフ：Claude が知らない「最近のこと」',
+      lead: 'Claude は、学習に使ったデータの「期限」までのことしか知りません。この期限を知識カットオフと呼びます',
+      body: [
+        Timeline({
+          items: [
+            { time: '学習', title: 'データを集めて学習', text: 'Web 上の文章などから学ぶ' },
+            { time: 'カットオフ', title: '知識の期限', text: 'ここまでの出来事は知っている', tone: 'green' },
+            { time: '公開', title: 'モデルが公開される', text: '通常は期限の数か月あとになる', tone: 'blue' },
+            { time: '現在', title: 'あなたが使う時点', text: '期限より新しい出来事は知らない', tone: 'yellow' },
+          ],
+        }),
+        Columns({
+          ratio: '1fr 1fr',
+          left: Callout({
+            type: 'warn',
+            title: 'たとえば',
+            text: '最近のニュース、新しい料金プラン、新しく出たライブラリの機能を聞くと、古い情報で自信ありげに答えてしまうことがあります。',
+          }),
+          right: Callout({
+            type: 'info',
+            title: '期限はモデルごとに違う',
+            text: '新しいモデルほど、新しい情報まで知っています。具体的な時期は、公式のモデル一覧で確認できます。',
+          }),
+        }),
+      ],
+    }),
+
+    ContentSlide({
+      kicker: KICKER,
+      scope: 'both',
+      title: '知識カットオフへの対策',
+      lead: '「知らないかもしれない」と考えて、必要な情報は自分で渡しましょう',
+      body: CompareTable({
+        compact: true,
+        headers: ['困りごと', '例', '対策'],
+        highlightColumn: 2,
+        rows: [
+          ['最新の情報を知らない', '新製品・料金の改定・最近のニュース', `Web 検索を使わせる ${ScopeTag('both', { compact: true })}`],
+          ['新しい仕様を知らない', 'ライブラリの新バージョンの書き方や設定名', `公式ドキュメントの URL や該当ページを渡す。claude.ai は添付、Claude Code は <code>@</code> や URL `],
+          ['古い書き方を提案する', '廃止された機能や、古い設定方法', `使っているバージョンを伝える。実際に動かして確認する ${ScopeTag('code', { compact: true })}`],
+          ['「今日」を取り違える', '年や日付が関わる計算・判断', '今日の日付を会話に書いておく'],
+        ],
+      }),
+      note: '※ 知識カットオフは、会話の長さの上限（コンテキストウィンドウ、第4章）とは別のものです。',
+    }),
+
+    ContentSlide({
+      kicker: KICKER,
+      scope: 'both',
       title: '苦手なことは、使い方で補える',
       body: CompareTable({
         headers: ['苦手なこと', 'こう補う', '関連する章'],
         highlightColumn: 1,
         rows: [
           ['社内ルールや背景を知らない', `Project instructions に書く ${ScopeTag('chat', { compact: true })}<br>CLAUDE.md に書く ${ScopeTag('code', { compact: true })}`, '第6章'],
-          ['最新情報を知らない', 'Web 検索を使う・公式ドキュメントの URL を渡す', '第2・3章'],
+          ['知識カットオフ以降の情報を知らない', 'Web 検索を使う・公式ドキュメントの URL を渡す', '次の2ページ'],
           ['もっともらしい間違い', 'テストを実行させる・根拠を聞く', '—'],
           ['長い作業で指示を忘れる', '小さく区切る・新しい会話で仕切り直す', '第4章'],
           ['見た目や実機の確認', '画面は自分で確認する・スクリーンショットを見せる', '—'],

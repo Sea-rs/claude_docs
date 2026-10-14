@@ -14,5 +14,10 @@
     display: flex;
     flex-direction: column;
     gap: $space-4;
+
+    // 左右にカードを1枚ずつ置いたときは、高さをそろえる
+    > .card:only-child {
+      flex: 1;
+    }
   }
 }
